@@ -82,7 +82,7 @@ export default class ClusteredMapView extends PureComponent {
 
   onRegionChangeComplete = (region) => {
     let data
-    if (region.longitudeDelta <= 80) {
+    if (region.longitudeDelta <= 150) {
       data = this.getClusters(region)
       this.setState({ region, data }, () => {
         this.props.onRegionChangeComplete && this.props.onRegionChangeComplete(region, data)
@@ -94,7 +94,7 @@ export default class ClusteredMapView extends PureComponent {
 
   getClusters = (region) => {
     const bbox = regionToBoundingBox(region),
-          viewport = (region.longitudeDelta) >= 40 ? { zoom: this.props.minZoom } : GeoViewport.viewport(bbox, this.dimensions)
+          viewport = (region.longitudeDelta) >= 150 ? { zoom: this.props.minZoom } : GeoViewport.viewport(bbox, this.dimensions)
 
     return this.index.getClusters(bbox, viewport.zoom)
   }
